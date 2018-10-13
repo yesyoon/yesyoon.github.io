@@ -15,10 +15,12 @@
 <h3>(On/Off)line_Auction </h3>
 <ul>
   <li>판매자 컨트랙트 주소: <span id="contractAddr"></span></li>
-  <li>구매자 어카운트 주소: <span id="accountAddr"></span></li>
-  <li>판매 품목: <span id="productData"></span></li> 
+  <li>최고 베팅자 주소: <span id="accountAddr"></span></li>
   <li>최고베팅값: <span id="storedData"></span>
     <button onclick="getValue()">(<span id="lastBlock"></span>)새로고침</button> </li>
+  <li>시간: <span id="auctiontime"></span></li>
+  <li>판매 품목: <span id="productData"></span></li> 
+  
   <li><input id="newValue" type="text"><button onclick="setValue()">베팅하기</button>
       <div id="result"></div></li>
 </ul>
@@ -210,8 +212,8 @@ window.addEventListener('load', function() {
 });
 
 function startApp() {
-  simpleStorageContract = web3.eth.contract(abi);
-  simpleStorage = simpleStorageContract.at(contractAddress);
+  AuctionContract = web3.eth.contract(abi);
+  openauction = AuctionContract.at(contractAddress);
   document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
   web3.eth.getAccounts(function(e,r){
     document.getElementById('accountAddr').innerHTML = getLink(r[0]);
